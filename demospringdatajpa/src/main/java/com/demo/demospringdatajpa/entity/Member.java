@@ -10,7 +10,10 @@ import lombok.*;
 @ToString(of = {"id","name","age"})
 @NamedQuery(name = "findByName",
             query="select m from Member m where m.name = :name")
-public class Member {
+@NamedEntityGraph(
+        name = "Member.all",
+        attributeNodes = @NamedAttributeNode("team"))
+public class Member extends BaseEntity{
     @Column(name = "member_id")
     @Id
     @GeneratedValue
